@@ -3,6 +3,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:tekyz_notification/constant/string_constant.dart';
 import 'package:tekyz_notification/function/cancel_notification_func.dart';
 import 'package:tekyz_notification/screen/timer_screen.dart';
+import 'package:tekyz_notification/widget/no_notification_widget.dart';
 import 'package:tekyz_notification/widget/notification_card_widget.dart';
 import 'package:tekyz_notification/widget/reschedule_bottom_sheet_widget.dart';
 
@@ -92,15 +93,18 @@ class _HomeScreenState extends State<HomeScreen> {
           bottom: false,
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 20),
-            child: ListView.separated(
-              itemCount: pendingNotifications.length,
-              separatorBuilder: (context, index) => const SizedBox(height: 10),
-              itemBuilder: (context, index) => NotificationCardWidget(
-                index: index,
-                notification: pendingNotifications[index],
-                handleOption: handleOptionFunc,
-              ),
-            ),
+            child: pendingNotifications.isEmpty
+                ? const NoNotificationWidget()
+                : ListView.separated(
+                    itemCount: pendingNotifications.length,
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(height: 10),
+                    itemBuilder: (context, index) => NotificationCardWidget(
+                      index: index,
+                      notification: pendingNotifications[index],
+                      handleOption: handleOptionFunc,
+                    ),
+                  ),
           ),
         ),
       ),

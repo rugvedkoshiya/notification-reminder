@@ -1,6 +1,7 @@
 class StringConst {
   // Home screen constant
   static const String tekyzNotification = "Tekyz Notification";
+  static const String noNotificationFound = "No notification found";
 
   // Form constant
   static const String addNotification = "Add Notification";
