@@ -1,17 +1,12 @@
-import 'dart:io';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:tekyz_notification/constant/string_constant.dart';
+import 'package:tekyz_notification/function/configure_timezone_func.dart';
 import 'package:tekyz_notification/function/pick_time_func.dart';
 import 'package:tekyz_notification/function/schedule_notification_func.dart';
 import 'package:tekyz_notification/utils/decoration.dart';
 import 'package:tekyz_notification/utils/extension.dart';
 import 'package:tekyz_notification/utils/show_toast.dart';
-import 'package:timezone/data/latest_all.dart' as tz;
-import 'package:timezone/timezone.dart' as tz;
 
 class TimerScreen extends StatefulWidget {
   const TimerScreen({super.key});
@@ -36,14 +31,6 @@ class _TimerScreenState extends State<TimerScreen> {
       FlutterLocalNotificationsPlugin();
 
   // Functions
-  Future<void> _configureLocalTimeZone() async {
-    if (kIsWeb || Platform.isLinux) {
-      return;
-    }
-    tz.initializeTimeZones();
-    final String timeZoneName = await FlutterTimezone.getLocalTimezone();
-    tz.setLocalLocation(tz.getLocation(timeZoneName));
-  }
 
   void onSubmitFunc() async {
     try {
@@ -67,12 +54,6 @@ class _TimerScreenState extends State<TimerScreen> {
       pickedTime = newPickedTime;
       timeController.text = pickedTime!.getReadableTime;
     }
-  }
-
-  @override
-  void initState() {
-    _configureLocalTimeZone();
-    super.initState();
   }
 
   @override

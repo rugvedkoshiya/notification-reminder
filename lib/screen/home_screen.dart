@@ -14,9 +14,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // Keys
-  // final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
   // Controllers
   final TextEditingController titleController = TextEditingController();
   final TextEditingController messageController = TextEditingController();
